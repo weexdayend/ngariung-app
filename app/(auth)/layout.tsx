@@ -4,6 +4,9 @@ import { dark } from "@clerk/themes"
 
 import '../globals.css'
 
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
+
 export const metadata = {
     title: 'Ngariung',
     description: 'A Next.js 13 Meta Ngariung Application'
@@ -19,7 +22,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }}
         >
             <html lang='en'>
-                <body className={`${inter.className} bg-dark-1`}>{children}</body>
+                <body className={`${inter.className} bg-dark-1`}>
+                    {children}
+                    <SpeedInsights />
+                    <Analytics />
+                </body>
             </html>
         </ClerkProvider>
     )

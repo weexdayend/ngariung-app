@@ -11,6 +11,9 @@ import RightSidebar from '@/components/shared/RightSidebar';
 import BottomBar from '@/components/shared/BottomBar';
 import LeftSidebar from '@/components/shared/LeftSidebar';
 
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from '@vercel/analytics/react';
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -39,6 +42,8 @@ export default function RootLayout({
                 <section className="main-container">
                   <div className="w-full max-w-4xl">
                     {children}
+                    <SpeedInsights />
+                    <Analytics />
                   </div>
                 </section>
 
