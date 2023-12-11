@@ -39,6 +39,11 @@ function ThreadCard({
   comments,
   isComment,
 }: Props) {
+
+  const textWithNewlines = content.split('{{newline}}').join('\n');
+
+  console.log(textWithNewlines)
+
   return (
     <article
       className={`flex w-full flex-col rounded-xl ${
@@ -67,7 +72,9 @@ function ThreadCard({
               </h4>
             </Link>
 
-            <p className='mt-2 text-small-regular text-light-2'>{content}</p>
+            <p className='mt-2 text-small-regular text-light-2' style={{ whiteSpace: 'pre-line' }}>
+              {textWithNewlines}
+            </p>
 
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
               <div className='flex gap-3.5'>

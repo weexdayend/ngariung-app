@@ -39,8 +39,10 @@ function PostThread({ userId }: Props) {
   });
 
   const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
+    const textWithPlaceholder = values.thread.replace(/\n/g, '{{newline}}');
+
     await createThread({
-      text: values.thread,
+      text: textWithPlaceholder,
       author: userId,
       communityId: organization ? organization.id : null,
       path: pathname,
@@ -64,7 +66,9 @@ function PostThread({ userId }: Props) {
                 Content
               </FormLabel>
               <FormControl className='no-focus border border-dark-4 bg-dark-3 text-light-1'>
-                <Textarea rows={8} {...field} />
+                <Textarea 
+                  rows={8} {...field} 
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

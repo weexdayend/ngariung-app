@@ -37,9 +37,11 @@ function Comment({ threadId, currentUserImg, currentUserId }: Props) {
   });
 
   const onSubmit = async (values: z.infer<typeof CommentValidation>) => {
+    const textWithPlaceholder = values.thread.replace(/\n/g, '{{newline}}');
+
     await addCommentToThread(
       threadId,
-      values.thread,
+      textWithPlaceholder,
       JSON.parse(currentUserId),
       pathname
     );
