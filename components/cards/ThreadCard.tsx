@@ -42,12 +42,10 @@ function ThreadCard({
 
   const textWithNewlines = content.split('{{newline}}').join('\n');
 
-  console.log(textWithNewlines)
-
   return (
     <article
-      className={`flex w-full flex-col rounded-xl ${
-        isComment ? "px-0 xs:px-7" : "bg-dark-2 p-7"
+      className={`flex w-full flex-col rounded-xl bg-white border border-gray-200 shadow-lg shadow-gray-300/40 ${
+        isComment ? "px-0 xs:px-7" : "p-7"
       }`}
     >
       <div className='flex items-start justify-between'>

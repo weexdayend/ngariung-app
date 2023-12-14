@@ -27,6 +27,9 @@ const threadSchema = new mongoose.Schema({
       ref: "Thread",
     },
   ],
+  type: {
+    type: mongoose.Schema.Types.Mixed,
+  }
 });
 
 const Thread = mongoose.models.Thread || mongoose.model("Thread", threadSchema);

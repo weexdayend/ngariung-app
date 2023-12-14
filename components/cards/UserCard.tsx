@@ -19,8 +19,8 @@ function UserCard({ id, name, username, imgUrl, personType }: Props) {
   const isCommunity = personType === "Community";
 
   return (
-    <article className='user-card'>
-      <div className='user-card_avatar'>
+    <article className='w-full flex flex-row items-center justify-between border border-gray-200 rounded-2xl px-4 py-4'>
+      <div className='flex flex-row items-center gap-4'>
         <div className='relative h-12 w-12'>
           <Image
             src={imgUrl}
@@ -31,8 +31,8 @@ function UserCard({ id, name, username, imgUrl, personType }: Props) {
         </div>
 
         <div className='flex-1 text-ellipsis'>
-          <h4 className='text-base-semibold text-light-1'>{name}</h4>
-          <p className='text-small-medium text-gray-1'>@{username}</p>
+          <h4 className='text-base text-gray-700'>{name}</h4>
+          <p className='text-sm text-gray-400'>@{username}</p>
         </div>
       </div>
 

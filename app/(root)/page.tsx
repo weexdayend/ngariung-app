@@ -6,6 +6,7 @@ import Pagination from "@/components/shared/Pagination";
 
 import { fetchPosts } from "@/lib/actions/thread.action";
 import { fetchUser } from "@/lib/actions/user.action";
+import PostThread from "@/components/form/PostThread";
 
 async function Home({
   searchParams,
@@ -25,8 +26,10 @@ async function Home({
 
   return (
     <>
-      <h1 className='head-text text-left'>Home</h1>
-
+      <section>
+        <PostThread userId={userInfo._id} avatar={userInfo.image} />
+      </section>
+      
       <section className='mt-9 flex flex-col gap-10'>
         {result.posts.length === 0 ? (
           <p className='no-result'>No threads found</p>
@@ -49,11 +52,11 @@ async function Home({
         )}
       </section>
 
-      <Pagination
+      {/* <Pagination
         path='/'
         pageNumber={searchParams?.page ? +searchParams.page : 1}
         isNext={result.isNext}
-      />
+      /> */}
     </>
   );
 }

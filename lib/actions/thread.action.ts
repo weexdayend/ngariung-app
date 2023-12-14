@@ -15,7 +15,10 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
   const skipAmount = (pageNumber - 1) * pageSize;
 
   // Create a query to fetch the posts that have no parent (top-level threads) (a thread that is not a comment/reply).
-  const postsQuery = Thread.find({ parentId: { $in: [null, undefined] } })
+  const postsQuery = Thread.find({ 
+    parentId: { $in: [null, undefined] } ,
+    'type.value': 'public',
+  })
     .sort({ createdAt: "desc" })
     .skip(skipAmount)
     .limit(pageSize)
@@ -53,9 +56,10 @@ interface Params {
   author: string,
   communityId: string | null,
   path: string,
+  type: any,
 }
 
-export async function createThread({ text, author, communityId, path }: Params
+export async function createThread({ text, author, communityId, path, type }: Params
 ) {
   try {
     connectToDB();
@@ -69,6 +73,7 @@ export async function createThread({ text, author, communityId, path }: Params
       text,
       author,
       community: communityIdObject, // Assign communityId if provided, or leave it null for personal account
+      type,
     });
 
     // Update User model
