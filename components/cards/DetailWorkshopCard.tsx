@@ -154,17 +154,36 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
 
   useEffect(() => {
     setLoading(true)
-    Promise.all([fetchWorkshop(), fetchParticipations(), fetchStage(), fetchTotalParticipant(), fetchCheckCertificate()])
-      .then(([workshopData, participationData, stageData, totalParticipant, certificateData]) => {
+    const fetchData = async () => {
+      try {
+        const [
+          workshopData,
+          participationData,
+          stageData,
+          totalParticipant,
+          certificateData,
+        ] = await Promise.all([
+          fetchWorkshop(),
+          fetchParticipations(),
+          fetchStage(),
+          fetchTotalParticipant(),
+          fetchCheckCertificate(),
+        ]);
+
         setWorkshop(workshopData);
         setParticipation(participationData);
-        setStage(stageData)
-        setTotal(totalParticipant)
-        setCert(certificateData)
-      })
-      .catch((error) => {
-        console.log(error)
-      }).finally(() => setLoading(false))
+        setStage(stageData);
+        setTotal(totalParticipant);
+        setCert(certificateData);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setUpdate(false);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
