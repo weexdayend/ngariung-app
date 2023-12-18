@@ -19,7 +19,7 @@ function Topbar() {
     pathname === `/profile/${userId}`;
     
   return (
-    <nav className='topbar bg-white shadow-xl shadow-blue-300/20'>
+    <nav className='topbar bg-white shadow-xl shadow-blue-300/20 z-20'>
       <Link href='/' className='flex items-center gap-2'>
         <Image src='/assets/logo.svg' alt='logo' width={32} height={32} />
         <p className='text-2xl text-gray-700 font-bold max-xs:hidden'>Ngariung</p>

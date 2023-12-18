@@ -24,7 +24,7 @@ function WorkshopCard({ data }: Props) {
       {
         data.map((item: any, index: number) => (
           <div key={index + item.EventName} className="relative bg-white rounded-2xl border border-gray-200 shadow-lg shadow-gray-300/40 h-fit">
-            <div className="absolute flex flex-row top-4 left-4 gap-2 z-50">
+            <div className="absolute flex flex-row top-4 left-4 gap-2 z-10">
               <div className="bg-gray-800 px-2 py-1.5 rounded-lg shadow-md">
                 <p className="text-white text-xs">{item.EventType.name}</p>
               </div>
@@ -49,7 +49,7 @@ function WorkshopCard({ data }: Props) {
               </div>
 
               {/* Profile picture */}
-              <div className='absolute top-28 left-4 h-14 w-14 border-2 border-white rounded-full overflow-hidden'>
+              <div className='absolute z-10 top-28 left-4 h-14 w-14 border-2 border-white rounded-full overflow-hidden'>
                 <Image
                   src={'/assets/detik-logo.jpeg'}
                   fill
