@@ -215,7 +215,7 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
               <div className="flex flex-row items-center gap-2 px-4 py-4">
                 <div className='relative h-12 w-12 rounded-full overflow-hidden'>
                   <Image
-                    src={'/assets/detik-logo.png'}
+                    src={'/assets/detik-logo.jpeg'}
                     fill
                     alt="logo"
                     className='rounded-full object-cover'

@@ -51,7 +51,7 @@ function WorkshopCard({ data }: Props) {
               {/* Profile picture */}
               <div className='absolute top-28 left-4 h-14 w-14 border-2 border-white rounded-full overflow-hidden'>
                 <Image
-                  src={'/assets/detik-logo.png'}
+                  src={'/assets/detik-logo.jpeg'}
                   fill
                   alt="logo"
                   className='rounded-full object-cover h-full w-full'
