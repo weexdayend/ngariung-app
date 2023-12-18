@@ -55,7 +55,7 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
 
   const fetchWorkshop = async() => {
     try {
-      const hit = await axios.post('http://localhost:3000/api/ngariung/get-event-id', { EventID: params.id })
+      const hit = await axios.post('https://sakapulse.vercel.app/api/ngariung/get-event-id', { EventID: params.id })
       const response = hit.data
 
       if (hit.status === 200 || hit.status === 201) {
@@ -72,7 +72,7 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
 
   const fetchParticipations = async() => {
     try {
-      const hit = await axios.post('http://localhost:3000/api/ngariung/get-participant-id', { EventID: params.id, UserID: userInfo.id })
+      const hit = await axios.post('https://sakapulse.vercel.app/api/ngariung/get-participant-id', { EventID: params.id, UserID: userInfo.id })
       const response = hit.data
 
       if (hit.status === 200 || hit.status === 201) {
@@ -89,7 +89,7 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
 
   const fetchStage = async() => {
     try {
-      const hit = await axios.post('http://localhost:3000/api/ngariung/get-stage-id', { EventID: params.id })
+      const hit = await axios.post('https://sakapulse.vercel.app/api/ngariung/get-stage-id', { EventID: params.id })
       const response = hit.data
 
       if (hit.status === 200 || hit.status === 201) {
@@ -139,7 +139,7 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof WorkshopValidation>) => {
     try {
-      const hit = await axios.post('http://localhost:3000/api/ngariung/book-event', {
+      const hit = await axios.post('https://sakapulse.vercel.app/api/ngariung/book-event', {
         EventID: params.id,
         UserID: userInfo.id,
         EventPassword: values.password,

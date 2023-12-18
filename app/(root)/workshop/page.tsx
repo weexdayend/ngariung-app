@@ -10,7 +10,7 @@ const Page = () => {
   const [dataWorkshop, setDataWorkshop] = useState([])
 
   const fetchWorkshop = async() => {
-    const hit = await axios.get('http://localhost:3000/api/ngariung/get-event')
+    const hit = await axios.get('https://sakapulse.vercel.app/api/ngariung/get-event')
     const response = hit.data
 
     setDataWorkshop(response.data)
