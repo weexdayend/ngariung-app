@@ -99,7 +99,7 @@ function PostThread({ userId, avatar }: Props) {
   return (
     <Form {...form}>
       <form
-        className='mt-10 flex flex-col gap-6 p-7 py-6 border-y border-gray-200'
+        className='mt-10 flex flex-col gap-6 py-6 border-y border-gray-200'
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <div className="flex flex-row gap-4">
@@ -108,18 +108,18 @@ function PostThread({ userId, avatar }: Props) {
               src={avatar}
               alt='user_community_image'
               fill
-              className='cursor-pointer rounded-full'
+              className='cursor-pointer rounded-full object-contain'
             />
           </div>
           <FormField
             control={form.control}
             name='thread'
             render={({ field }) => (
-              <FormItem className='flex w-full flex-col gap-3 no-focus ring-0'>
+              <FormItem className='flex-1 w-full flex-col gap-3 no-focus ring-0'>
                 <FormControl className='no-focus ring-0 text-gray-700'>
                   <Textarea 
                     rows={8} {...field}
-                    placeholder="Pesan, Kesan, Kritik, dan Saran?!"
+                    placeholder="Post thread..."
                     style={{ resize: 'none' }}
                     className="border-0 rounded-xl"
                   />

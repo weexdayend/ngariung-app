@@ -19,13 +19,13 @@ function Topbar() {
     pathname === `/profile/${userId}`;
     
   return (
-    <nav className='topbar bg-white shadow-xl shadow-blue-300/20 z-20'>
+    <nav className='topbar bg-white shadow-xl shadow-blue-300/20'>
       <Link href='/' className='flex items-center gap-2'>
         <Image src='/assets/logo.svg' alt='logo' width={32} height={32} />
         <p className='text-2xl text-gray-700 font-bold max-xs:hidden'>Ngariung</p>
       </Link>
 
-      <div className='flex items-center gap-1'>
+      <div className='flex items-center gap-4'>
         <div className='block md:hidden'>
           <SignedIn>
             <SignOutButton>
@@ -39,7 +39,7 @@ function Topbar() {
         <Link
           href={`/profile/${userId}`}
           key={'Profile'}
-          className={`flex flex-row items-center justify-start px-4 py-4 rounded-xl gap-2 ${isActive && "bg-gradient-to-t from-purple-500 to-indigo-600 "}`}
+          className={`flex flex-row items-center justify-start px-2 py-2 rounded-xl gap-2 ${isActive && "bg-gradient-to-t from-purple-500 to-indigo-600 "}`}
         >
           <HiOutlineUser className={`h-5 w-5 ${isActive ? 'text-white' : 'text-gray-500/70'}`} />
           <p className={`text-sm max-lg:hidden ${isActive ? 'text-white' : 'text-gray-500/70'}`}>Profile</p>

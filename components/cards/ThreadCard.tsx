@@ -44,8 +44,8 @@ function ThreadCard({
 
   return (
     <article
-      className={`flex w-full flex-col rounded-xl bg-white border border-gray-200 shadow-lg shadow-gray-300/40 ${
-        isComment ? "px-0 xs:px-7" : "p-7"
+      className={`flex w-full flex-col rounded-xl bg-white ${
+        isComment ? "px-7 py-2" : "p-7 border border-gray-200 shadow-lg shadow-gray-300/40"
       }`}
     >
       <div className='flex items-start justify-between'>
@@ -56,7 +56,7 @@ function ThreadCard({
                 src={author.image}
                 alt='user_community_image'
                 fill
-                className='cursor-pointer rounded-full'
+                className='cursor-pointer rounded-full object-cover'
               />
             </Link>
 
@@ -70,19 +70,19 @@ function ThreadCard({
               </h4>
             </Link>
 
-            <p className='mt-2 text-small-regular text-light-2' style={{ whiteSpace: 'pre-line' }}>
+            <p className='mt-2 text-sm text-gray-700' style={{ whiteSpace: 'pre-line' }}>
               {textWithNewlines}
             </p>
 
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
               <div className='flex gap-3.5'>
-                <Image
+                {/* <Image
                   src='/assets/heart-gray.svg'
                   alt='heart'
                   width={24}
                   height={24}
                   className='cursor-pointer object-contain'
-                />
+                /> */}
                 <Link href={`/thread/${id}`}>
                   <Image
                     src='/assets/reply.svg'
@@ -92,7 +92,7 @@ function ThreadCard({
                     className='cursor-pointer object-contain'
                   />
                 </Link>
-                <Image
+                {/* <Image
                   src='/assets/repost.svg'
                   alt='heart'
                   width={24}
@@ -105,7 +105,7 @@ function ThreadCard({
                   width={24}
                   height={24}
                   className='cursor-pointer object-contain'
-                />
+                /> */}
               </div>
 
               {isComment && comments.length > 0 && (

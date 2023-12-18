@@ -380,9 +380,9 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
                               <>
                               {
                                 cert < 1 ? (<CertinfoCard params={params} userInfo={userInfo} />) : (
-                                  <div className="flex w-full flex-col items-center justify-center mt-10 px-12">
-                                    <p className="text-base text-indigo-600 font-bold text-center">Terima kasih telah mengikut seminar kami.</p>
-                                    <p className="text-xs text-gray-800 text-center">Untuk sertifikat nya, silahkan cek di email yang kamu daftarkan ya.</p>
+                                  <div className="flex w-full flex-col items-center justify-center mt-10 px-8">
+                                    <p className="text-base text-indigo-600 font-bold text-center">Terima kasih telah mengikuti seminar kami.</p>
+                                    <p className="text-xs text-gray-800 text-center">untuk sertifikat ditunggu 1-2 hari, selalu cek email kamu secara berkala ya.</p>
                                   </div>
                                 )
                               }
