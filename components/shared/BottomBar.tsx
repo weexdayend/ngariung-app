@@ -21,16 +21,9 @@ function Bottombar() {
             <Link
               href={link.route}
               key={link.label}
-              className={`bottombar_link ${isActive && "bg-primary-500"}`}
+              className={`bottombar_link ${isActive && "bg-gradient-to-t from-purple-600 to-indigo-500"} px-2 py-2 rounded-lg`}
             >
-              <Image
-                src={link.imgURL}
-                alt={link.label}
-                width={16}
-                height={16}
-                className='object-contain'
-              />
-
+              <link.imgURL className={`h-5 w-5 ${isActive ? 'text-white' : 'text-gray-500/70'}`} />
               <p className='text-subtle-medium text-light-1 max-sm:hidden'>
                 {link.label.split(/\s+/)[0]}
               </p>

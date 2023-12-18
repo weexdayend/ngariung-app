@@ -6,6 +6,7 @@ import Pagination from "@/components/shared/Pagination";
 
 import { fetchPosts } from "@/lib/actions/thread.action";
 import { fetchUser } from "@/lib/actions/user.action";
+
 import PostThread from "@/components/form/PostThread";
 
 async function Home({

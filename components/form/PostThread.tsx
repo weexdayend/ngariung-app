@@ -88,7 +88,7 @@ function PostThread({ userId, avatar }: Props) {
       author: userId,
       communityId: organization ? organization.id : null,
       path: pathname,
-      type: selectedStatus
+      type: { value: "public", label: "Public" }
     });
 
     form.reset()
@@ -119,7 +119,7 @@ function PostThread({ userId, avatar }: Props) {
                 <FormControl className='no-focus ring-0 text-gray-700'>
                   <Textarea 
                     rows={8} {...field}
-                    placeholder="What is happening?!"
+                    placeholder="Pesan, Kesan, Kritik, dan Saran?!"
                     style={{ resize: 'none' }}
                     className="border-0 rounded-xl"
                   />
@@ -131,7 +131,7 @@ function PostThread({ userId, avatar }: Props) {
         </div>
         
         <div className="w-full flex flex-row gap-2 items-center justify-end">
-          <Popover open={open} onOpenChange={setOpen}>
+          {/* <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
@@ -172,7 +172,7 @@ function PostThread({ userId, avatar }: Props) {
                 </CommandList>
               </Command>
             </PopoverContent>
-          </Popover>
+          </Popover> */}
           <Button type='submit' className='bg-indigo-600 w-fit rounded-full'>
             Post
           </Button>

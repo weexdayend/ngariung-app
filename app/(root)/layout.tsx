@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import '../globals.css'
 
 import { ClerkProvider } from '@clerk/nextjs'
-import { dark } from "@clerk/themes";
+import { shadesOfPurple } from "@clerk/themes";
 
 import TopBar from '@/components/shared/TopBar';
 import RightSidebar from '@/components/shared/RightSidebar';
@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <ClerkProvider
       appearance={{
-        baseTheme: dark,
+        baseTheme: shadesOfPurple,
       }}
     >
       <html lang="en">
@@ -39,14 +39,12 @@ export default function RootLayout({
               <LeftSidebar />
                 
                 <section className="main-container">
-                  <div className="w-full max-w-4xl">
+                  <div className="w-full max-w-screen">
                     {children}
-                    <SpeedInsights />
-                    <Analytics />
                   </div>
                 </section>
 
-              <RightSidebar />
+              {/* <RightSidebar /> */}
             </main>
 
           <BottomBar />
