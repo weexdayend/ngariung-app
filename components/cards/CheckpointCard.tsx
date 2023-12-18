@@ -1,11 +1,11 @@
 "use client"
 
 import * as z from "zod";
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckPointValidation, WorkshopValidation } from '@/lib/validations/user';
+import { CheckPointValidation } from '@/lib/validations/user';
 
 import {
   Form,
@@ -15,6 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
 
 interface Props {
   params: any
@@ -23,6 +24,10 @@ interface Props {
 
 const CheckpointCard = ({ params, userInfo }: Props) => {
 
+  const [update, setUpdate] = useState<boolean>(false)
+
+  const [message, setMessage] = useState<string>('')
+  
   const form = useForm<z.infer<typeof CheckPointValidation>>({
     resolver: zodResolver(CheckPointValidation),
     defaultValues: {
@@ -30,9 +35,27 @@ const CheckpointCard = ({ params, userInfo }: Props) => {
     },
   });
 
-  const onSubmit = async() => {
-
-  }
+  const onSubmit = async (values: z.infer<typeof CheckPointValidation>) => {
+    try {
+      const hit = await axios.post('https://sakapulse.vercel.app/api/ngariung/attend-workshop', {
+        EventID: params.id,
+        UserID: userInfo.id,
+        Token: values.token
+      });
+  
+      if (hit.status === 200 || hit.status === 201) {
+        window.location.reload()
+      } else {
+        setMessage('Password yang kamu masukkan salah.');
+      }
+    } catch (error: any) {
+      if (error.response && error.response.status === 401) {
+        setMessage('Password yang kamu masukkan salah.');
+      } else {
+        setMessage(error.message);
+      }
+    }
+  };
 
   return (
     <div className="px-4 py-6">

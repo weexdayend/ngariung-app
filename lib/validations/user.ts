@@ -14,3 +14,9 @@ export const WorkshopValidation = z.object({
 export const CheckPointValidation = z.object({
     token: z.string().min(6).max(6)
 })
+
+export const CertificateValidation = z.object({
+    name: z.string().min(3).max(30),
+    email: z.string().email(), // Email validation
+    phone: z.string().regex(/^\+?[0-9]+$/, { message: "Invalid phone number" }).min(10).max(13), // Phone number validation
+});

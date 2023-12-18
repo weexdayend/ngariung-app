@@ -13,6 +13,7 @@ import {
   HiArrowLongRight,
   HiMinusCircle,
   HiOutlineCheck,
+  HiOutlineCheckCircle,
   HiOutlineMapPin,
   HiOutlineMinusCircle,
   HiOutlineUsers,
@@ -36,6 +37,7 @@ import { useRouter } from 'next/navigation';
 import { WorkshopValidation } from '@/lib/validations/user';
 
 import CheckpointCard from "./CheckpointCard";
+import CertinfoCard from "./CertinfoCard";
 
 interface Props {
     params: any
@@ -48,6 +50,8 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
   const [workshop, setWorkshop] = useState<any>([])
   const [participation, setParticipation] = useState<any>([])
   const [stage, setStage] = useState<any>([])
+  const [total, setTotal] = useState<any>(0)
+  const [cert, setCert] = useState<any>(0)
 
   const [update, setUpdate] = useState<boolean>(false)
 
@@ -89,7 +93,41 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
 
   const fetchStage = async() => {
     try {
-      const hit = await axios.post('https://sakapulse.vercel.app/api/ngariung/get-stage-id', { EventID: params.id })
+      const hit = await axios.post('https://sakapulse.vercel.app/api/ngariung/get-stage-id', { EventID: params.id, UserID: userInfo.id })
+      const response = hit.data
+
+      if (hit.status === 200 || hit.status === 201) {
+        return response.data
+      } else {
+        // router.push('/workshop')
+        return false
+      }
+    } catch (error) {
+      // router.push('/workshop')
+      return false
+    }
+  }
+
+  const fetchTotalParticipant = async() => {
+    try {
+      const hit = await axios.post('https://sakapulse.vercel.app/api/ngariung/get-participant', { EventID: params.id })
+      const response = hit.data
+
+      if (hit.status === 200 || hit.status === 201) {
+        return response.data
+      } else {
+        // router.push('/workshop')
+        return false
+      }
+    } catch (error) {
+      // router.push('/workshop')
+      return false
+    }
+  }
+
+  const fetchCheckCertificate = async() => {
+    try {
+      const hit = await axios.post('https://sakapulse.vercel.app/api/ngariung/get-certificate-id', { EventID: params.id, UserID: userInfo.id })
       const response = hit.data
 
       if (hit.status === 200 || hit.status === 201) {
@@ -105,16 +143,20 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
   }
 
   useEffect(() => {
-    Promise.all([fetchWorkshop(), fetchParticipations(), fetchStage()])
-      .then(([workshopData, participationData, stageData]) => {
+    Promise.all([fetchWorkshop(), fetchParticipations(), fetchStage(), fetchTotalParticipant(), fetchCheckCertificate()])
+      .then(([workshopData, participationData, stageData, totalParticipant, certificateData]) => {
         setWorkshop(workshopData);
         setParticipation(participationData);
         setStage(stageData)
+        setTotal(totalParticipant)
+        setCert(certificateData)
       })
       .catch((error) => {
         console.log(error)
       }).finally(() => setUpdate(!update));
   }, []);
+
+  console.log(cert)
 
   useEffect(() => {
     if (update) {
@@ -214,6 +256,9 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
               <div className="flex flex-row items-center w-full gap-2">
                 <p className="text-xs text-gray-700">{moment(item.EventDate).format('LL')}, {item.EventTime.EventStart} - {item.EventTime.EventEnd}</p>
               </div>
+              <div className="flex flex-row items-center w-full gap-2">
+                <p className="text-xs text-gray-700"><span className="font-bold">{total}</span>/{item.EventMaxUser} Peserta</p>
+              </div>
             </div>
             
             <div className="w-full px-4 h-fit overflow-hidden py-6">
@@ -221,26 +266,34 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
               <p className="text-sm text-gray-600">{item.EventDesc.desc}</p>
             </div>
 
-            <div className="flex flex-col w-full gap-2 mt-4 border-y border-gray-200 py-4 px-4">
-              <div className="flex flex-row items-center w-full gap-2">
-                <HiOutlineUsers className="h-5 w-5 text-gray-700" />
-                <p className="text-xs text-gray-700">{item.EventMaxUser} Seat Peserta</p>
-              </div>
-            </div>
-
-            <section className="flex flex-col w-full gap-2 border-b border-gray-200">
+            <section className="flex flex-col w-full border-b border-gray-200">
               {
                 participation.length > 0 && (
                   <>
                     {
                       stage.map((item: any, index: number) => (
-                        <div key={index} className="w-full flex flex-row items-center gap-2 border-b border-gray-200 px-4 py-4">
-                          <HiOutlineMinusCircle className="w-5 h-5 text-gray-200" />
-                          <p className="text-xs text-gray-200">{item.EventStageName}</p>
+                        <div key={index} className={`w-full flex flex-row items-center gap-2 border-b border-gray-200 px-4 py-4`}>
+                          {
+                            item.EventStageStatus === 1 ? (
+                              <HiOutlineCheckCircle className={`w-5 h-5 text-indigo-600`} />
+                            ) : (
+                              <HiOutlineMinusCircle className={`w-5 h-5 text-gray-200`} />
+                            )
+                          }
+                          <p className={`text-xs ${item.EventStageStatus === 1 ? 'text-indigo-600' : 'text-gray-200'}`}>{item.EventStages.EventStageName}</p>
                         </div>
                       ))
                     }
-                    <CheckpointCard params={params} userInfo={userInfo} />
+                    {!stage.some((item: any) => item.EventStageStatus === 1) ? (
+                        <CheckpointCard params={params} userInfo={userInfo} />
+                      ) : (
+                        <>
+                        {
+                          cert < 1 && (<CertinfoCard params={params} userInfo={userInfo} />)
+                        }
+                        </>
+                      )
+                    }
                   </>
                 )
               }
@@ -251,8 +304,8 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
               participation.length > 0 ? (
                 <div className="flex-1 flex-col items-center justify-center px-6">
                   <div className="px-4 py-2.5 flex flex-row items-center justify-center gap-2 rounded-xl">
-                    <p className="text-blue-400 text-sm text-center">Sudah Bergabung</p>
-                    <HiOutlineCheck className="w-4 h-4 text-blue-400" />
+                    <p className="text-indigo-600 text-sm text-center">Sudah Bergabung</p>
+                    <HiOutlineCheck className="w-4 h-4 text-indigo-600" />
                   </div>
                 </div>
               ) : (
