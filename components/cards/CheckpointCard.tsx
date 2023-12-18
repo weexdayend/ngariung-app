@@ -61,7 +61,7 @@ const CheckpointCard = ({ params, userInfo }: Props) => {
     <div className="px-4 py-6">
       <Form {...form}>
         <form
-          className='flex flex-row items-start px-4 gap-4'
+          className='flex flex-row items-start gap-4'
           onSubmit={form.handleSubmit(onSubmit)}
         >
         <FormField

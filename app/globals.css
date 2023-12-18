@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+.typingAnimation {
+  display: inline-block;
+  font-family: monospace;
+}
+
+.blinkingCursor {
+  animation: blink-caret 0.75s infinite;
+}
+
+@keyframes blink-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
 @layer components {
   /* main */
   .main-container {

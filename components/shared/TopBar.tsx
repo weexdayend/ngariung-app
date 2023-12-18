@@ -7,7 +7,7 @@ import { dark } from "@clerk/themes";
 import Image from "next/image";
 import Link from "next/link";
 
-import { HiOutlineUser } from "react-icons/hi2";
+import { HiOutlineUser, HiPower } from "react-icons/hi2";
 
 function Topbar() {
   const pathname = usePathname();
@@ -30,12 +30,7 @@ function Topbar() {
           <SignedIn>
             <SignOutButton>
               <div className='flex cursor-pointer'>
-                <Image
-                  src='/assets/logout.svg'
-                  alt='logout'
-                  width={24}
-                  height={24}
-                />
+                <HiPower className={`h-5 w-5 text-gray-500/70`} />
               </div>
             </SignOutButton>
           </SignedIn>
