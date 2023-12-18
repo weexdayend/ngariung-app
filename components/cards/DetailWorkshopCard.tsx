@@ -156,8 +156,6 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
       }).finally(() => setUpdate(!update));
   }, []);
 
-  console.log(cert)
-
   useEffect(() => {
     if (update) {
       Promise.all([fetchWorkshop(), fetchParticipations(), fetchStage()])
@@ -284,7 +282,7 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
                         </div>
                       ))
                     }
-                    {!stage.some((item: any) => item.EventStageStatus === 1) ? (
+                    {stage.some((item: any) => item.EventStageStatus !== 1) ? (
                         <CheckpointCard params={params} userInfo={userInfo} />
                       ) : (
                         <>
