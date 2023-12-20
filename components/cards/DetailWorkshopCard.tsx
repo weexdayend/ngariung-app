@@ -73,6 +73,7 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
       const response = hit.data
 
       if (hit.status === 200 || hit.status === 201) {
+        console.log(response.data)
         return response.data
       } else {
         // router.push('/workshop')
@@ -343,6 +344,7 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
                   <div className="w-full px-4 h-fit overflow-hidden py-6">
                     <h1 className="text-base font-bold mb-6">{item.EventName}</h1>
                     <p className="text-sm text-gray-600">{item.EventDesc.desc}</p>
+                    <p className="text-xs text-gray-600 py-6">{item.EventDesc.address}</p>
                   </div>
     
                   <div className="w-full flex flex-col px-4 h-fit overflow-hidden py-6 gap-4 border-y border-gray-200">
@@ -380,7 +382,7 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
                               <>
                               {
                                 cert < 1 ? (<CertinfoCard params={params} userInfo={userInfo} />) : (
-                                  <div className="flex w-full flex-col items-center justify-center mt-10 px-8">
+                                  <div className="flex w-full flex-col items-center justify-center mt-10 px-8 pb-12">
                                     <p className="text-base text-indigo-600 font-bold text-center">Terima kasih telah mengikuti seminar kami.</p>
                                     <p className="text-xs text-gray-800 text-center">untuk sertifikat ditunggu 1-2 hari, selalu cek email kamu secara berkala ya.</p>
                                   </div>
@@ -393,57 +395,63 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
                       )
                     }
                   </section>
-    
-                  <div className="flex w-full items-end justify-end mt-6 pb-6">
+
                   {
-                    participation.length > 0 ? (
-                      <></>
+                    item.EventStatus == true ? (
+                      <div className="flex w-full items-end justify-end mt-6 pb-6">
+                      {
+                        participation.length > 0 ? (
+                          <></>
+                        ) : (
+                          <>
+                            {
+                              item.EventType.name === 'Private' ? (
+                              <>
+                              <Form {...form}>
+                                <form
+                                  className='flex flex-row items-start px-4 gap-4'
+                                  onSubmit={form.handleSubmit(onSubmit)}
+                                >
+                                <FormField
+                                  control={form.control}
+                                  name='password'
+                                  render={({ field }) => (
+                                    <FormItem className='flex w-full flex-col gap-3'>
+                                      <FormControl>
+                                        <Input
+                                          type='text'
+                                          placeholder="Password"
+                                          className='account-form_input no-focus'
+                                          {...field}
+                                        />
+                                      </FormControl>
+                                      <FormMessage />
+                                    </FormItem>
+                                  )}
+                                />
+                                <button type="submit" className="px-4 py-2.5 flex flex-row items-center gap-2 bg-gradient-to-t from-purple-500 to-indigo-600 rounded-lg">
+                                  <p className="text-white text-sm">Gabung</p>
+                                </button>
+                                </form>
+                              </Form>
+                              </>
+                              ) : (
+                              <>
+                                <button className="px-4 py-2.5 flex flex-row items-center gap-2">
+                                  <p className="text-blue-600 text-base">Participate</p>
+                                  <HiArrowLongRight className="text-blue-600 h-6 w-6" />
+                                </button>
+                              </>
+                              )
+                            }
+                          </>
+                        )
+                      }
+                      </div>
                     ) : (
-                      <>
-                        {
-                          item.EventType.name === 'Private' ? (
-                          <>
-                          <Form {...form}>
-                            <form
-                              className='flex flex-row items-start px-4 gap-4'
-                              onSubmit={form.handleSubmit(onSubmit)}
-                            >
-                            <FormField
-                              control={form.control}
-                              name='password'
-                              render={({ field }) => (
-                                <FormItem className='flex w-full flex-col gap-3'>
-                                  <FormControl>
-                                    <Input
-                                      type='text'
-                                      placeholder="Password"
-                                      className='account-form_input no-focus'
-                                      {...field}
-                                    />
-                                  </FormControl>
-                                  <FormMessage />
-                                </FormItem>
-                              )}
-                            />
-                            <button type="submit" className="px-4 py-2.5 flex flex-row items-center gap-2 bg-gradient-to-t from-purple-500 to-indigo-600 rounded-lg">
-                              <p className="text-white text-sm">Gabung</p>
-                            </button>
-                            </form>
-                          </Form>
-                          </>
-                          ) : (
-                          <>
-                            <button className="px-4 py-2.5 flex flex-row items-center gap-2">
-                              <p className="text-blue-600 text-base">Participate</p>
-                              <HiArrowLongRight className="text-blue-600 h-6 w-6" />
-                            </button>
-                          </>
-                          )
-                        }
-                      </>
+                      <></>
                     )
                   }
-                  </div>
                 </div>
               ))
             }

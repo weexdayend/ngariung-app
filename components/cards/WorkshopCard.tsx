@@ -3,8 +3,6 @@ import Image from "next/image";
 import {
   HiArrowLongRight,
   HiOutlineCalendar,
-  HiOutlineMapPin,
-  HiOutlineUsers,
 } from 'react-icons/hi2'
 
 import Link from "next/link";
@@ -24,9 +22,13 @@ function WorkshopCard({ data }: Props) {
       {
         data.map((item: any, index: number) => (
           <div key={index + item.EventName} className="relative bg-white rounded-2xl border border-gray-200 shadow-lg shadow-gray-300/40 h-fit">
-            <div className="absolute flex flex-row top-2 right-2 gap-2 z-10">
+            <div className="absolute flex flex-row top-4 right-4 gap-2 z-10">
               <div className="bg-gray-800 px-3 py-1.5 rounded-xl shadow-md">
                 <p className="text-white text-xs">{item.EventType.name}</p>
+              </div>
+
+              <div className={`${item.EventStatus === true ? 'bg-indigo-600' : 'bg-red-600'} px-3 py-1.5 rounded-xl shadow-md`}>
+                <p className="text-white text-xs">{item.EventStatus === true ? 'Open' : 'Closed'}</p>
               </div>
             </div>
 
@@ -60,9 +62,12 @@ function WorkshopCard({ data }: Props) {
             </div>
 
             
-            <div className="w-full px-4 h-32 overflow-hidden mt-10">
+            <div className="w-full px-4 h-34 overflow-hidden mt-10">
+              <p className="text-gray-400 text-xs">
+                {item.EventStatus === true ? 'Event akan segera dimulai.' : 'Event sudah selesai.'}
+              </p>
               <h1 className="text-lg font-bold text-gray-700">{item.EventName}</h1>
-              <p className="text-sm text-gray-600 mt-4 ">
+              <p className="text-sm text-gray-600 mt-4 overflow-hidden line-clamp-3">
                 {item.EventDesc.desc}
               </p>
             </div>
