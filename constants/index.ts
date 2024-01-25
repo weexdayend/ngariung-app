@@ -13,8 +13,8 @@ export const sidebarLinks = [
   },
   {
     imgURL: HiOutlineAcademicCap,
-    route: "/workshop",
-    label: "Workshop",
+    route: "/events",
+    label: "Events",
   },
   {
     imgURL: HiOutlineUsers,

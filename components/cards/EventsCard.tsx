@@ -16,23 +16,13 @@ interface Props {
   data: any
 }
 
-function WorkshopCard({ data }: Props) {
+function EventsCard({ data }: Props) {
   return(
     <div className="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 w-full gap-4 pt-6">
       {
         data.map((item: any, index: number) => (
           <div key={index + item.EventName} className="relative bg-white rounded-2xl border border-gray-200 shadow-lg shadow-gray-300/40 h-fit">
-            <div className="absolute flex flex-row top-4 right-4 gap-2 z-10">
-              <div className="bg-gray-800 px-3 py-1.5 rounded-xl shadow-md">
-                <p className="text-white text-xs">{item.EventType.name}</p>
-              </div>
-
-              <div className={`${item.EventStatus === true ? 'bg-indigo-600' : 'bg-red-600'} px-3 py-1.5 rounded-xl shadow-md`}>
-                <p className="text-white text-xs">{item.EventStatus === true ? 'Open' : 'Closed'}</p>
-              </div>
-            </div>
-
-            <div className="relative bg-blue-600 flex flex-row items-center gap-4 h-36 rounded-t-2xl overflow-hidden">
+            <div className="relative bg-blue-600 flex flex-row items-center gap-4 h-52 rounded-t-2xl overflow-hidden">
               {/* Background image with overlay */}
               <div className="absolute inset-0">
                 {
@@ -47,26 +37,29 @@ function WorkshopCard({ data }: Props) {
                     <></>
                   )
                 }
-                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-40" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60" />
               </div>
 
-              {/* Profile picture */}
-              <div className='absolute top-4 left-4 h-14 w-14 border-2 border-white rounded-full overflow-hidden'>
-                <Image
-                  src={'/assets/detik-logo.jpeg'}
-                  fill
-                  alt="logo"
-                  className='rounded-full object-cover h-full w-full'
-                />
+
+
+              <div className="absolute top-4 left-0 w-full flex flex-col gap-2 px-4 h-24 overflow-hidden">
+                <div className="flex flex-row top-4 right-4 gap-2 z-10">
+                  <div className="bg-gray-800 px-2 py-1.5 rounded-xl shadow-md">
+                    <p className="text-white text-xs">{item.EventType.name}</p>
+                  </div>
+
+                  <div className={`${item.EventStatus === true ? 'bg-indigo-600' : 'bg-red-600'} px-2 py-1.5 rounded-xl shadow-md`}>
+                    <p className="text-white text-xs">{item.EventStatus === true ? 'Open' : 'Closed'}</p>
+                  </div>
+                </div>
+                <h1 className="flex text-lg font-bold text-white">{item.EventName}</h1>
               </div>
             </div>
 
-            
-            <div className="w-full px-4 h-34 overflow-hidden mt-10">
+            <div className="w-full px-4 h-32 overflow-hidden py-4">
               <p className="text-gray-400 text-xs">
                 {item.EventStatus === true ? 'Event akan segera dimulai.' : 'Event sudah selesai.'}
               </p>
-              <h1 className="text-lg font-bold text-gray-700">{item.EventName}</h1>
               <p className="text-sm text-gray-600 mt-4 overflow-hidden line-clamp-3">
                 {item.EventDesc.desc}
               </p>
@@ -80,7 +73,7 @@ function WorkshopCard({ data }: Props) {
             </div>
 
             <div className="flex w-full items-end justify-end mt-6 pb-6">
-              <Link href={`/workshop/${item.EventID}`}>
+              <Link href={`/events/${item.EventID}`}>
                 <button className="px-4 py-2.5 flex flex-row items-center gap-2">
                   <p className="text-blue-600 text-base">Lihat Detail</p>
                   <HiArrowLongRight className="text-blue-600 h-6 w-6" />
@@ -94,4 +87,4 @@ function WorkshopCard({ data }: Props) {
   )
 }
 
-export default WorkshopCard;
+export default EventsCard;

@@ -4,7 +4,7 @@ import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { fetchUser } from "@/lib/actions/user.action";
 
-import DetailWorkshopCard from '@/components/cards/DetailWorkshopCard';
+import DetailEventsCard from '@/components/cards/DetailEventsCard';
 
 async function Page({ params }: { params: { id: string } }) {
   const user = await currentUser();
@@ -15,7 +15,7 @@ async function Page({ params }: { params: { id: string } }) {
     
   return (
     <section>
-      <DetailWorkshopCard userInfo={userInfo} params={params} />
+      <DetailEventsCard userInfo={userInfo} params={params} />
     </section>
   )
 }

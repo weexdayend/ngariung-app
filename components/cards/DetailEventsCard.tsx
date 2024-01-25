@@ -52,7 +52,7 @@ interface Props {
     params: any
     userInfo: any
 }
-const DetailWorkshopCard = ({ params, userInfo }: Props) => {
+const DetailEventsCard = ({ params, userInfo }: Props) => {
 
   const router = useRouter()
 
@@ -462,4 +462,4 @@ const DetailWorkshopCard = ({ params, userInfo }: Props) => {
   )
 }
 
-export default DetailWorkshopCard
+export default DetailEventsCard

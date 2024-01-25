@@ -13,6 +13,7 @@ interface Props {
     name: string;
     image: string;
     id: string;
+    username: string;
   };
   community: {
     id: string;
@@ -26,6 +27,32 @@ interface Props {
     };
   }[];
   isComment?: boolean;
+  result: any;
+}
+
+function timeAgo(createdAt: string) {
+  const currentDate = new Date();
+  const createdAtDate = new Date(Date.parse(createdAt));
+
+  const timeDifference = currentDate.getTime() - createdAtDate.getTime();
+  const seconds = Math.floor(timeDifference / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+
+  if (days > 7) {
+    // If the date is more than 7 days old, return the actual date
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    return createdAtDate.toLocaleDateString(undefined, options);
+  } else if (days > 0) {
+    return `${days} day${days > 1 ? 's' : ''} ago`;
+  } else if (hours > 0) {
+    return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+  } else if (minutes > 0) {
+    return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+  } else {
+    return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+  }
 }
 
 function ThreadCard({
@@ -38,9 +65,11 @@ function ThreadCard({
   createdAt,
   comments,
   isComment,
+  result
 }: Props) {
 
-  const textWithNewlines = content.split('{{newline}}').join('\n');
+  const textWithNewlines = content.split('{{newline}}').join('\n');  
+  const timeAgoString = timeAgo(createdAt);
 
   return (
     <article
@@ -64,9 +93,9 @@ function ThreadCard({
           </div>
 
           <div className='flex w-full flex-col'>
-            <Link href={`/profile/${author.id}`} className='w-fit'>
-              <h4 className='cursor-pointer text-base-semibold text-light-1'>
-                {author.name}
+            <Link href={`/profile/${author.id}`} className='w-fit flex flex-row items-end'>
+              <h4 className='cursor-pointer font-semibold texs-base'>
+                {author.name} <span className="text-gray-400 font-light">@{author.username}</span> <span className='text-xs text-gray-400 font-light'>&#x2022; {timeAgoString}</span>
               </h4>
             </Link>
 

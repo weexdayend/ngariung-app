@@ -1,10 +1,11 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
-import WorkshopCard from '@/components/cards/WorkshopCard'
 
 import axios from 'axios'
 import Link from 'next/link'
+
+import EventsCard from '@/components/cards/EventsCard'
 
 const Page = () => {
 
@@ -24,13 +25,13 @@ const Page = () => {
   return (
     <>
       <div className="w-full flex flex-row items-center justify-between">
-        <h1 className="text-3xl text-left font-bold text-gray-700">Workshop</h1>
-        <Link href="/workshop/certificate">
+        <h1 className="text-3xl text-left font-bold text-gray-700">Events</h1>
+        <Link href="/events/certificate">
           <h1 className="text-xs text-right font-bold text-indigo-600 cursor-pointer">Verifikasi Sertifikat</h1>
         </Link>
       </div>
       
-      <WorkshopCard data={dataWorkshop} />
+      <EventsCard data={dataWorkshop} />
     </>
   )
 }
