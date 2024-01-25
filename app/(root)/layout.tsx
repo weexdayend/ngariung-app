@@ -10,6 +10,7 @@ import RightSidebar from '@/components/shared/RightSidebar';
 import BottomBar from '@/components/shared/BottomBar';
 import LeftSidebar from '@/components/shared/LeftSidebar';
 
+import { Toaster } from "@/components/ui/toaster"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from '@vercel/analytics/react';
 
@@ -46,6 +47,8 @@ export default function RootLayout({
 
               {/* <RightSidebar /> */}
             </main>
+
+            <Toaster />
 
             <footer className="pb-24">
               {/* Powered By */}
