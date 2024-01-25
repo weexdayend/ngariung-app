@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { QrScanner } from "react-qrcode-scanner";
 import { useToast } from "@/components/ui/use-toast"
 
@@ -9,6 +9,7 @@ function Page () {
   const { toast } = useToast()
 
   const [qrcode, setQrcode] = useState<string | 'scan qrcode first!'>('scan qrcode first!');
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const handleScan = (value: any) => {
     setQrcode(value)
@@ -18,7 +19,21 @@ function Page () {
     console.log({error})
   }
 
-  const isDisabled = qrcode === qrcode
+  useEffect(() => {
+    // The effect function runs after each render
+    // Here, we can compare the previous and current values of qrcode
+
+    // Use a second piece of state to store the previous value
+    // Initialize it with the initial value of qrcode
+    let prevQrcode = qrcode;
+
+    // Update the previous value and check if the button should be disabled
+    setIsDisabled(prevQrcode === qrcode);
+
+    // Update the previous value for the next render
+    prevQrcode = qrcode;
+
+  }, [qrcode]); // The effect depends on the qrcode state
 
   return (
     <div className="flex flex-col gap-4">
