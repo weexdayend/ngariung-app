@@ -8,7 +8,7 @@ import { useToast } from "@/components/ui/use-toast"
 function Page () {
   const { toast } = useToast()
 
-  const [qrcode, setQrcode] = useState<string | 'testing-qrcode'>('testing-qrcode');
+  const [qrcode, setQrcode] = useState<string | 'scan qrcode first!'>('scan qrcode first!');
 
   const handleScan = (value: any) => {
     setQrcode(value)
@@ -17,6 +17,8 @@ function Page () {
   const handleError = (error: any) => {
     console.log({error})
   }
+
+  const isDisabled = qrcode === 'scan qrcode first!'
 
   return (
     <div className="flex flex-col gap-4">
@@ -37,13 +39,14 @@ function Page () {
         <h1>{qrcode}</h1>
       </div>
       <Button 
+        disabled={isDisabled}
         type='submit' 
         className='bg-indigo-600 sm:w-full md:w-fit lg:w-fit rounded-full'
         onClick={() => {
           toast({
             variant: "saka",
-            title: "Scheduled: Catch up",
-            description: "Friday, February 10, 2023 at 5:57 PM",
+            title: "QR Code Scanned",
+            description: "Participant has been scanned!",
           })
         }}
       >
