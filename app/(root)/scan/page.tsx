@@ -9,31 +9,18 @@ function Page () {
   const { toast } = useToast()
 
   const [qrcode, setQrcode] = useState<string | 'scan qrcode first!'>('scan qrcode first!');
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [newQrcode, setNewQrcode] = useState<string | ''>('');
 
   const handleScan = (value: any) => {
     setQrcode(value)
+    if(value !== qrcode)setNewQrcode(value)
   }
 
   const handleError = (error: any) => {
     console.log({error})
   }
 
-  useEffect(() => {
-    // The effect function runs after each render
-    // Here, we can compare the previous and current values of qrcode
-
-    // Use a second piece of state to store the previous value
-    // Initialize it with the initial value of qrcode
-    let prevQrcode = qrcode;
-
-    // Update the previous value and check if the button should be disabled
-    setIsDisabled(prevQrcode === qrcode);
-
-    // Update the previous value for the next render
-    prevQrcode = qrcode;
-
-  }, [qrcode]); // The effect depends on the qrcode state
+  const isDisabled = qrcode === newQrcode
 
   return (
     <div className="flex flex-col gap-4">
@@ -51,7 +38,7 @@ function Page () {
         />
       </div>
       <div className="w-full h-fit px-4 py-3 bg-gray-100 rounded-lg">
-        <h1>{qrcode}</h1>
+        <h1>{newQrcode}</h1>
       </div>
       <Button 
         disabled={isDisabled}
