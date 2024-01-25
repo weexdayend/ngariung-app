@@ -18,7 +18,7 @@ function Page () {
     console.log({error})
   }
 
-  const isDisabled = qrcode === 'scan qrcode first!'
+  const isDisabled = qrcode === qrcode
 
   return (
     <div className="flex flex-col gap-4">
