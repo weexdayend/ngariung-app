@@ -9,16 +9,14 @@ function Page () {
   const { toast } = useToast()
 
   const [qrcode, setQrcode] = useState<string | 'scan qrcode first!'>('scan qrcode first!');
-  const [newQrcode, setNewQrcode] = useState<string | 'scan qrcode first!'>('scan qrcode first!');
 
   const [isDisabled, setIsDisabled] = useState<boolean>(true)
 
   const handleScan = (value: any) => {
-    if(value !== qrcode && value !== newQrcode){
-      setNewQrcode(value)
+    if(value !== qrcode){
+      setQrcode(value)
       setIsDisabled(false)
     } else {
-      setQrcode(value)
       setIsDisabled(true)
     }
   }
