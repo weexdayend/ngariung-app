@@ -27,6 +27,7 @@ interface Props {
     };
   }[];
   isComment?: boolean;
+  result?: any;
 }
 
 function timeAgo(createdAt: string) {
@@ -64,6 +65,7 @@ function ThreadCard({
   createdAt,
   comments,
   isComment,
+  result
 }: Props) {
 
   const textWithNewlines = content.split('{{newline}}').join('\n');  
