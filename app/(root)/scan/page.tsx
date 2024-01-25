@@ -12,9 +12,10 @@ function Page () {
   const [newQrcode, setNewQrcode] = useState<string | 'scan qrcode first!'>('scan qrcode first!');
 
   const handleScan = (value: any) => {
-    if(value !== qrcode){
-      setQrcode(value)
+    if(value !== qrcode && value !== newQrcode){
       setNewQrcode(value)
+    } else {
+      setQrcode(value)
     }
   }
 
