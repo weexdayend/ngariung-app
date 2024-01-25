@@ -11,19 +11,21 @@ function Page () {
   const [qrcode, setQrcode] = useState<string | 'scan qrcode first!'>('scan qrcode first!');
   const [newQrcode, setNewQrcode] = useState<string | 'scan qrcode first!'>('scan qrcode first!');
 
+  const [isDisabled, setIsDisabled] = useState<boolean>(true)
+
   const handleScan = (value: any) => {
     if(value !== qrcode && value !== newQrcode){
       setNewQrcode(value)
+      setIsDisabled(false)
     } else {
       setQrcode(value)
+      setIsDisabled(true)
     }
   }
 
   const handleError = (error: any) => {
     console.log({error})
   }
-
-  const isDisabled = qrcode === newQrcode
 
   return (
     <div className="flex flex-col gap-4">
