@@ -26,7 +26,7 @@ function Page () {
           onError={handleError}
           facingMode = 'environment'
           constraints = {null}
-          flipHorizontally = {false}
+          flipHorizontally = {true}
           delay = {800}
           resolution = {800}
           aspectRatio = '4:4'
